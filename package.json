@@ -9,7 +9,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server",
     "back": "nodemon server",
-    "front": "npm start --prefix client",
+    "front": "cd client/container && npm start",
     "dev": "concurrently \"npm run back\" \"npm run front\""
   },
   "keywords": [],

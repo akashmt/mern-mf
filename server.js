@@ -32,11 +32,26 @@ app.use((err, req, res, next) => {
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.use('/marketing/latest/', express.static('client/marketing/dist'));
+  app.use('/auth/latest/',express.static('client/auth/dist'));
+  app.use('/', express.static('client/container/dist'));
+ 
+  // container app
+  
+  app.get('/marketing/latest/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client/marketing', 'dist', 'index.html'));
   });
+
+  app.get('/auth/latest/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client/auth', 'dist', 'index.html'));
+  });
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client/container', 'dist', 'index.html'));
+  });
+
+ 
+ 
 }
 
 
